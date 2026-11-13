@@ -12,10 +12,10 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_MX">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=1785742327">
-<link rel="stylesheet" href="assets/v2.css?v=2.5">
+<link rel="preload" href="assets/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=3.0">
+<link rel="stylesheet" href="assets/v2.css?v=2.6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -361,14 +361,6 @@
     }
   ]
 }
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5C07PH8H24"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-5C07PH8H24');
 </script>
 </head>
 <body>
@@ -824,6 +816,7 @@
       </ul></div>
     </div>
     <div class="fbot">
+      <p class="flegal"><a href="privacy.html" data-i18n="lg.priv">Privacy Notice</a><a href="terms.html" data-i18n="lg.terms">Terms of Use</a><a href="privacy.html#cookies" data-i18n="lg.cookies">Cookies</a><button type="button" data-sb-cookies data-i18n="ck.set">Cookie settings</button></p>
       <p data-i18n="ft.cp">© 2026 Springback Technology Advisors. All rights reserved.</p>
       <p>Monterrey, Mexico · United States · Remote Worldwide</p>
     </div>
@@ -1144,7 +1137,7 @@ const T={
 
 const FAQS={"en": [{"q": "What does 'Springback' mean?", "a": "Some things, when knocked down, simply stay down. Others — the toughest ones — grow back stronger every time, no matter how many times they're cut down. That's the pattern Springback is named for: not just survival, but return — recovery that leaves a business better positioned than before."}, {"q": "Who is Springback's ideal client?", "a": "We work best with business owners who already believe in technology — who understand that a well-maintained, well-integrated tech stack is a real business advantage, not just overhead."}, {"q": "Do you work with businesses in Mexico AND the US?", "a": "Yes — that's one of our core strengths. We're fully bilingual (English and Spanish) and deeply familiar with both markets, business cultures, and regulatory environments."}, {"q": "What is your approach to cybersecurity?", "a": "Security is built into everything we do — not bolted on at the end. We conduct security audits, design policies, respond to incidents, and monitor your systems continuously."}, {"q": "Do you offer Managed IT Services (MSP)?", "a": "Yes — Managed IT Services is our flagship offering. We proactively monitor, maintain, and support your infrastructure so problems get caught before they cause downtime, instead of waiting for something to break."}, {"q": "How long does a typical project take?", "a": "It depends on scope. A website launches in 2–3 weeks. A full SaaS implementation (M365, HubSpot, Dynamics) takes 4–8 weeks depending on complexity. We always provide a clear timeline in the proposal — no surprises."}, {"q": "What happens if something goes wrong after delivery?", "a": "We don't disappear at handoff. Every project includes full documentation and a support window. Monthly retainer clients get ongoing monitoring and priority response."}, {"q": "Can I start small and grow with Springback?", "a": "Absolutely. Many clients start with a Technology Audit ($500) to get a clear picture of where they stand — then we build from that foundation at whatever pace and budget makes sense."}, {"q": "Will you try to upsell me on things I don't need?", "a": "No — if anything, the opposite. We'll tell you the truth even if it costs us the sale. If a $50 fix solves the problem, we're not going to pitch you a $5,000 project just because it's more profitable for us. Our goal is a long-term relationship, not a single invoice — and that only works if you can trust what we tell you."}], "es": [{"q": "¿Qué significa 'Springback'?", "a": "Algunas cosas, al caer, simplemente se quedan abajo. Otras — las más fuertes — regresan más fuertes cada vez, sin importar cuántas veces las derriben. Ese es el patrón que le da nombre a Springback: no solo sobrevivir, sino regresar — una recuperación que deja al negocio en mejor posición que antes."}, {"q": "¿Quién es el cliente ideal de Springback?", "a": "Trabajamos mejor con empresarios que ya creen en la tecnología — que entienden que un stack tecnológico bien mantenido e integrado es una ventaja de negocio real, no solo un gasto."}, {"q": "¿Trabajan con empresas en México Y en EE.UU.?", "a": "Sí — esa es una de nuestras fortalezas principales. Somos completamente bilingües (inglés y español) y profundamente familiarizados con ambos mercados, culturas empresariales y entornos regulatorios."}, {"q": "¿Cuál es su enfoque de ciberseguridad?", "a": "La seguridad está incorporada en todo lo que hacemos — no añadida al final. Realizamos auditorías, diseñamos políticas, respondemos a incidentes y monitoreamos tus sistemas continuamente."}, {"q": "¿Ofrecen Servicios Administrados de TI (MSP)?", "a": "Sí — los Servicios Administrados de TI son nuestro servicio insignia. Monitoreamos, mantenemos y apoyamos tu infraestructura de forma proactiva para detectar problemas antes de que causen tiempo de inactividad."}, {"q": "¿Cuánto tarda un proyecto típico?", "a": "Depende del alcance. Un sitio web se lanza en 2–3 semanas. Una implementación SaaS completa (M365, HubSpot, Dynamics) toma 4–8 semanas según la complejidad. Siempre damos un cronograma claro en la propuesta."}, {"q": "¿Qué pasa si algo falla después de la entrega?", "a": "No desaparecemos al entregar. Cada proyecto incluye documentación completa y una ventana de soporte. Los clientes con retainer mensual reciben monitoreo continuo y respuesta prioritaria."}, {"q": "¿Puedo empezar pequeño y crecer con Springback?", "a": "Absolutamente. Muchos clientes comienzan con una Auditoría Tecnológica ($500) para tener un panorama claro de dónde están — luego construimos desde esa base al ritmo y presupuesto que tiene sentido."}, {"q": "¿Intentarán venderme cosas que no necesito?", "a": "No — más bien lo contrario. Te diremos la verdad aunque eso nos cueste la venta. Si una solución de $50 resuelve el problema, no te ofreceremos un proyecto de $5,000 solo porque nos convenga más a nosotros. Buscamos una relación a largo plazo, no una sola factura — y eso solo funciona si confías en lo que te decimos."}]};
 </script>
-<script src="assets/main.js?v=2.2"></script>
+<script src="assets/main.js?v=2.3"></script>
 <script src="assets/v2.js?v=2.2"></script>
 </body>
 </html>

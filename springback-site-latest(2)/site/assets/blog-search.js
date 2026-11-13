@@ -1,3 +1,6 @@
+// Index URL resolved from this script's own location (works in any subfolder).
+const SB_SEARCH_INDEX = new URL('blog-search-index.json', document.currentScript.src).href;
+const SB_SEARCH_ROOT = new URL('../', document.currentScript.src);
 // Blog search — loads a small pre-built JSON index and searches it with
 // Fuse.js (fuzzy matching + relevance ranking). No server, no database.
 // On the blog index page: filters the existing card grid in place.
@@ -10,15 +13,8 @@
   const grid = document.getElementById('blogGrid');
   let fuse = null;
 
-  // Figure out the right relative path to the index depending on page depth.
-  // Handles both directory-style URLs (e.g. /blog/) and explicit filenames
-  // (e.g. /blog/some-article.html) correctly.
-  const pathname = window.location.pathname;
-  const parts = pathname.split('/').filter(Boolean);
-  const endsWithSlash = pathname.endsWith('/');
-  const depth = endsWithSlash ? parts.length : parts.length - 1;
-  const prefix = depth > 0 ? '../'.repeat(depth) : './';
-  const indexUrl = prefix + 'assets/blog-search-index.json';
+  // Resolve the index next to this script, so it works at the domain root or in /test/.
+  const indexUrl = SB_SEARCH_INDEX;
 
   fetch(indexUrl)
     .then(r => r.json())
@@ -37,7 +33,7 @@
     // rootRelativeUrl looks like "/blog/some-slug.html" — convert it to a
     // proper relative link from the current page's actual location, so this
     // still works correctly on a subfolder deployment (e.g. /test/).
-    return prefix + rootRelativeUrl.replace(/^\//, '');
+    return new URL(rootRelativeUrl.replace(/^\//, ''), SB_SEARCH_ROOT).href;
   }
 
   function renderDropdown(matches) {

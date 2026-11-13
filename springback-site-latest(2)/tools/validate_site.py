@@ -7,6 +7,15 @@ import sys,re,json,os,glob
 root=os.path.abspath(sys.argv[1] if len(sys.argv)>1 else '.')
 errs=[];warns=[]
 pages=sorted(glob.glob(root+'/**/*.html',recursive=True))
+# Shared strings (const TC in assets/main.js) are available on every page
+TC={'en':{},'es':{}}
+_mj=os.path.join(root,'assets','main.js')
+if os.path.exists(_mj):
+    _m=re.search(r'const TC=(\{.*?\n\});',open(_mj,encoding='utf-8').read(),re.S)
+    if _m:
+        try: TC=json.loads(_m.group(1))
+        except Exception as e: errs.append(f'assets/main.js: TC is not valid JSON ({e})')
+    if set(TC['en'])^set(TC['es']): errs.append('assets/main.js: TC keys differ between EN and ES: '+', '.join(sorted(set(TC['en'])^set(TC['es']))))
 def rel(p): return os.path.relpath(p,root)
 for p in pages:
     s=open(p,encoding='utf-8').read(); r=rel(p); d=os.path.dirname(p)
@@ -35,6 +44,7 @@ for p in pages:
     en,es=set(T.get('en',{})),set(T.get('es',{}))
     for k in sorted(en^es): errs.append(f'{r}: i18n key only in one language: {k}')
     used=set(re.findall(r'data-i18n(?:-title|-desc|-placeholder|-alt)?="([^"]+)"',s))
+    en|=set(TC['en']); es|=set(TC['es'])
     for k in sorted(used-en): errs.append(f'{r}: data-i18n key missing in EN: {k}')
     for k in sorted(used-es): errs.append(f'{r}: data-i18n key missing in ES: {k}')
 # sitemap

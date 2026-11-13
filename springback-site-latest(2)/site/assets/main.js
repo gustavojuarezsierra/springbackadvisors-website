@@ -3,6 +3,36 @@
 // `const FAQS = {en:[...], es:[...]}` on pages with a #faq-list) to already
 // be defined in a <script> tag BEFORE this file is loaded.
 
+// Shared strings used on every page (footer legal links, cookie banner, form
+// privacy notes). Page T entries win over these. Must stay valid JSON between
+// "const TC=" and "\n};" — tools/validate_site.py parses it.
+const TC={
+  "en": {
+    "lg.priv": "Privacy Notice",
+    "lg.terms": "Terms of Use",
+    "lg.cookies": "Cookies",
+    "lg.form": "Springback Technology Advisors uses your details only to respond to this request.",
+    "lg.form.link": "Privacy Notice",
+    "ck.set": "Cookie settings",
+    "ck.msg": "We use Google Analytics cookies to see which pages are useful, only if you allow it. Your theme and language choices are stored on your device so the site works.",
+    "ck.more": "How we use cookies",
+    "ck.acc": "Accept analytics",
+    "ck.rej": "Reject"
+  },
+  "es": {
+    "lg.priv": "Aviso de Privacidad",
+    "lg.terms": "Términos de Uso",
+    "lg.cookies": "Cookies",
+    "lg.form": "Springback Technology Advisors usa tus datos solo para atender esta solicitud.",
+    "lg.form.link": "Aviso de Privacidad",
+    "ck.set": "Configurar cookies",
+    "ck.msg": "Usamos cookies de Google Analytics para saber qué páginas son útiles, solo si lo permites. Tu tema y tu idioma se guardan en tu dispositivo para que el sitio funcione.",
+    "ck.more": "Cómo usamos las cookies",
+    "ck.acc": "Aceptar analítica",
+    "ck.rej": "Rechazar"
+  }
+};
+
 function renderFAQ(lang){
   const list=document.getElementById('faq-list');
   if(!list || typeof FAQS === 'undefined') return;
@@ -26,7 +56,7 @@ function setLang(lang){
   const btnEs=document.getElementById('btn-es');
   if(btnEn) btnEn.classList.toggle('active',lang==='en');
   if(btnEs) btnEs.classList.toggle('active',lang==='es');
-  const t=T[lang];
+  const t=Object.assign({},TC[lang],T[lang]);
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n');
     if(t[k]!==undefined) el.innerHTML=t[k];
@@ -59,24 +89,98 @@ function toggleTheme(){
   localStorage.setItem('sb-theme',isLight?'dark':'light');
 }
 
-async function init(){
+function init(){
   const savedTheme=localStorage.getItem('sb-theme');
   if(savedTheme){
     document.documentElement.setAttribute('data-theme',savedTheme);
     const btn=document.getElementById('theme-btn');
     if(btn) btn.textContent=savedTheme==='dark'?'☀️':'🌙';
   }
+  // Language: saved choice, else the browser's language. No IP lookups:
+  // they sent every visitor's IP to third parties and delayed the first paint.
   const saved=localStorage.getItem('sb-lang');
-  if(saved){setLang(saved);return;}
-  const apis=[
-    ()=>fetch('https://ipwho.is/').then(r=>r.json()).then(d=>d.country_code),
-    ()=>fetch('https://ipapi.co/country/').then(r=>r.text()).then(t=>t.trim()),
-    ()=>fetch('https://api.country.is/').then(r=>r.json()).then(d=>d.country)
-  ];
-  for(const api of apis){
-    try{const c=await api();setLang(c==='MX'?'es':'en');return;}catch(e){continue;}
+  const langs=navigator.languages||[navigator.language||'en'];
+  setLang(saved||(langs.some(l=>/^es\b/i.test(l))?'es':'en'));
+  initConsent();
+}
+
+// ===== Cookie consent (Google Analytics loads only after "Accept") =====
+const SB_GA='G-5C07PH8H24';
+const SB_CONSENT_DAYS=365;
+const SB_BASE=new URL('../',document.currentScript.src); // site root, works in /test/ too
+
+function readConsent(){
+  try{
+    const c=JSON.parse(localStorage.getItem('sb-consent'));
+    if(c&&c.v===1&&Date.now()-c.ts<SB_CONSENT_DAYS*864e5) return c;
+  }catch(e){}
+  return null;
+}
+
+function loadAnalytics(){
+  window['ga-disable-'+SB_GA]=false;
+  if(window.gtag) return;
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag('js',new Date());
+  gtag('config',SB_GA);
+  const s=document.createElement('script');
+  s.async=true;
+  s.src='https://www.googletagmanager.com/gtag/js?id='+SB_GA;
+  document.head.appendChild(s);
+}
+
+function clearAnalyticsCookies(){
+  window['ga-disable-'+SB_GA]=true;
+  const host=location.hostname, root=host.split('.').slice(-2).join('.');
+  document.cookie.split(';').forEach(c=>{
+    const n=c.split('=')[0].trim();
+    if(!/^_ga/.test(n)) return;
+    ['',host,'.'+host,'.'+root].forEach(d=>{
+      document.cookie=n+'=; Max-Age=0; path=/'+(d?'; domain='+d:'');
+    });
+  });
+}
+
+function saveConsent(analytics){
+  try{localStorage.setItem('sb-consent',JSON.stringify({v:1,analytics:analytics,ts:Date.now()}));}catch(e){}
+  analytics?loadAnalytics():clearAnalyticsCookies();
+  const b=document.getElementById('sb-ck');
+  if(b) b.hidden=true;
+}
+
+function showConsentBanner(){
+  let b=document.getElementById('sb-ck');
+  if(!b){
+    b=document.createElement('div');
+    b.id='sb-ck';
+    b.className='ck';
+    b.setAttribute('role','region');
+    b.setAttribute('aria-label','Cookies');
+    b.innerHTML='<p><span data-i18n="ck.msg"></span> <a data-i18n="ck.more"></a></p>'+
+      '<div class="ck-btns"><button type="button" class="ck-b" data-ck="0" data-i18n="ck.rej"></button>'+
+      '<button type="button" class="ck-b" data-ck="1" data-i18n="ck.acc"></button></div>';
+    b.querySelector('a').href=new URL('privacy.html#cookies',SB_BASE).href;
+    b.addEventListener('click',e=>{
+      const v=e.target.getAttribute('data-ck');
+      if(v!==null) saveConsent(v==='1');
+    });
+    document.body.appendChild(b);
+    const t=Object.assign({},TC[document.documentElement.lang]||TC.en,(typeof T!=='undefined'&&T[document.documentElement.lang])||{});
+    b.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t[el.getAttribute('data-i18n')];});
   }
-  setLang(navigator.language?.toLowerCase().startsWith('es')?'es':'en');
+  b.hidden=false;
+}
+
+function initConsent(){
+  document.addEventListener('click',e=>{
+    if(e.target.closest('[data-sb-cookies]')){e.preventDefault();showConsentBanner();}
+  });
+  const c=readConsent();
+  if(c){ if(c.analytics) loadAnalytics(); return; }
+  // Browser "Global Privacy Control" signal counts as a refusal; don't ask.
+  if(navigator.globalPrivacyControl) return;
+  showConsentBanner();
 }
 
 // Contact form handler — submits via Web3Forms, blocks bot submissions via honeypot
