@@ -154,3 +154,12 @@ Styling from the owner's ChatGPT/Gemini mockups, adapted to the existing page st
 - Primary button: brighter left-to-right blue gradient with top sheen and glow; real SVG arrow; text Poppins 500 at 1rem. Gradient starts at `#1A79E2` (not cyan) so white text stays WCAG AA.
 - Secondary link: darker text, 40 px circle with a centred thin SVG arrow.
 - `v2.css` bumped to `?v=2.4`. Validator: 0 errors.
+
+## V2 Step 2d — Homepage package 003-007 (Nov 13, 2026)
+- 003: Stats (15+ / 8+ / 13 / EN/ES) moved out of the hero into a centered band right below it: line icon + number + label, thin dividers; 2x2 grid on mobile.
+- 004: "Platforms we work with" is now a scrolling strip of 7 platforms (HubSpot, Microsoft Dynamics, Claude / Anthropic, ChatGPT / OpenAI, Make.com, n8n, AWS). Each shows a small white logo plus the name; on hover the logo shows its real colors on a white tile and the strip pauses. Reduced-motion: static wrapped row. Logos in `assets/img/logos/`. Azure and Cloudflare removed from the strip. Experience-only note kept. New i18n keys `par.ai`, `par.auto` (EN/ES).
+- 005: Badges cut to one row: Microsoft 365, Google Workspace, Zapier, WordPress, Shopify, Stripe, Mercado Pago.
+- 006: About tabs (Our Story / Why Us / Our Approach) restyled as pill buttons; active tab filled #0057c8 (AA contrast).
+- 007: FAQ accordion items use the page background (border kept). Applies to every page using v2.css.
+- Brief rule updated by owner decision: small official logos allowed next to platform names, experience-only wording, no partnership implied.
+- v2.css cache-bust bumped to 2.5. Validator: 0 errors.
