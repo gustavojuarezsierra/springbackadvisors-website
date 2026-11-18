@@ -173,3 +173,15 @@ Styling from the owner's ChatGPT/Gemini mockups, adapted to the existing page st
 - 006: Footer legal row (Privacy Notice · Terms of Use · Cookies · Cookie settings) synced to all 22 pages; privacy and terms added to `sitemap.xml`.
 - Also: removed the first-visit IP-geolocation calls (ipwho.is, ipapi.co, country.is) that sent visitor IPs to 3 third parties and delayed the language switch; language now comes from the saved choice or the browser language (Spanish browsers get Spanish). Fixed root-relative paths that broke in `/test/`: MSP checklist download URL and the blog search index/result links. Shared strings now live in `TC` in `main.js` (page `T` overrides it); `validate_site.py` reads `TC` too. Cache-bust: style.css 3.0, v2.css 2.6, main.js 2.3, blog-search.js 1.1 (contact.html had a stale v2.css 2.4).
 - Checked in Chromium under `/test/`: no third-party requests before consent, GA loads only after Accept, reject clears cookies, banner reopens, ES/EN switching, blog search works, no 404s. Validator: 0 errors, 0 warnings.
+
+---
+
+## Versioning (from Nov 18, 2026)
+Each package is now a version, MAJOR.MINOR.PATCH (MAJOR = redesign or structural change, MINOR = normal package, PATCH = quick fixes). Each version gets a heading here, a Git tag, a zip named `springback-site-vX.Y.Z.zip`, and a hidden `<!-- Springback site vX.Y.Z -->` comment at the top of every page. **v0.9.0** = the site as of the Compliance package above. v1.0.0 is reserved for the official launch.
+
+## v0.10.0 (Nov 18, 2026)
+- 001: Experience strip redesigned as a contained panel: soft blue gradient from the theme blues (light and dark), thin border, shadow; numbers 1.55rem → 2rem, icons 38 → 42px, labels in normal case and larger. Data and EN/ES text unchanged; mobile 2×2 kept.
+- 002: Less space between the hero and the strip (hero bottom padding 80px → 24px; strip top padding 34px → 8px).
+- 003: Google Antigravity added to the platforms logo strip after ChatGPT / OpenAI, in both copies of the loop (`assets/img/logos/antigravity.svg`, internal IDs renamed). Reuses the "AI Agents & Assistants" / "Agentes y asistentes de IA" label. Means experience with the tool, not a partnership.
+- 004: `v2.css` cache version 2.6 → 2.7 on all pages; version comment added to every page.
+- Preview: GitHub Pages (Actions workflow publishes `site/` on every push to `main`). Repo is public only until launch.

@@ -438,3 +438,16 @@ h1,h2,h3,h4,h5,h6,.hero-title,.stat-n,.plat-n{font-family:'Outfit',system-ui,san
 .legal ul{padding-left:22px;margin-bottom:12px;}
 .legal a{color:var(--accent);}
 .legal .upd{font-size:0.82rem;color:var(--text2);}
+
+/* ===== v0.10.0 (Nov 18) ===== */
+/* Experience strip: contained gradient panel, bigger numbers, normal-case labels; less space under hero */
+[data-theme="light"]{--sband-bg:linear-gradient(135deg,rgba(0,87,200,.10),rgba(0,87,200,.03));--sband-b:rgba(0,87,200,.16)}
+[data-theme="dark"]{--sband-bg:linear-gradient(135deg,rgba(34,184,255,.14),rgba(47,107,255,.06));--sband-b:rgba(120,160,255,.22)}
+.hero:has(+ .stats-band){padding-bottom:24px}
+.stats-band{padding:8px 0 34px}
+.sband{background:var(--sband-bg),var(--surface);border:1px solid var(--sband-b);border-radius:18px;box-shadow:var(--card-sh);padding:22px 12px}
+.sband li{border-left-color:var(--sband-b)}
+.sband svg{width:42px;height:42px}
+.sband .stat-n{font-size:2rem}
+.sband .stat-l{font-size:.9rem;font-weight:500;text-transform:none;letter-spacing:0;margin-top:6px}
+@media(max-width:760px){.sband{padding:20px 16px}.sband .stat-n{font-size:1.7rem}}
