@@ -451,3 +451,38 @@ h1,h2,h3,h4,h5,h6,.hero-title,.stat-n,.plat-n{font-family:'Outfit',system-ui,san
 .sband .stat-n{font-size:2rem}
 .sband .stat-l{font-size:.9rem;font-weight:500;text-transform:none;letter-spacing:0;margin-top:6px}
 @media(max-width:760px){.sband{padding:20px 16px}.sband .stat-n{font-size:1.7rem}}
+
+/* ===== v0.11.0 (Nov 20) ===== */
+/* Menu: animated brand-blue underline on hover for top-level items without a dropdown */
+@media(hover:hover){
+  .nav-links>li:not(.has-dd)>a:not(.nav-cta){position:relative}
+  .nav-links>li:not(.has-dd)>a:not(.nav-cta)::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;
+    background:#1a79e2;transform:scaleX(0);transform-origin:left center;transition:transform .28s ease}
+  .nav-links>li:not(.has-dd)>a:not(.nav-cta):hover::after,
+  .nav-links>li:not(.has-dd)>a:not(.nav-cta):focus-visible::after{transform:scaleX(1)}
+}
+@media(prefers-reduced-motion:reduce){.nav-links>li>a::after{transition:none}}
+
+/* Hero tiles: lighter, clearer glass (owner sample): frosted white, thin bright edge, soft glow, regular-weight text */
+[data-theme="light"]{
+  --mist:linear-gradient(160deg,rgba(255,255,255,.72) 0%,rgba(244,249,255,.48) 55%,rgba(232,242,253,.42) 100%);
+  --edge:linear-gradient(150deg,rgba(255,255,255,.95) 0%,rgba(205,226,250,.55) 45%,rgba(255,255,255,.85) 100%);
+  --mist-sh:0 10px 28px -16px rgba(30,90,170,.28),inset 0 0 18px rgba(255,255,255,.65),inset 0 1px 0 rgba(255,255,255,.95);
+  --tile-txt:#14284d;
+}
+[data-theme="dark"]{
+  --mist:linear-gradient(160deg,rgba(255,255,255,.10) 0%,rgba(160,200,255,.05) 55%,rgba(120,170,255,.06) 100%);
+  --edge:linear-gradient(150deg,rgba(220,235,255,.55) 0%,rgba(140,190,255,.18) 45%,rgba(220,235,255,.40) 100%);
+  --mist-sh:0 12px 30px -16px rgba(0,0,0,.55),inset 0 0 18px rgba(160,200,255,.06),inset 0 1px 0 rgba(255,255,255,.14);
+  --tile-txt:#e6eeff;
+}
+.htile{font-weight:400!important;font-size:.95rem;line-height:1.3;border-radius:18px;
+  -webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%)}
+.htile::before{padding:1px}
+.htile svg{stroke-width:1.4}
+.htile:hover,.htile:focus-visible{box-shadow:var(--mist-sh),0 14px 30px -14px rgba(26,121,226,.40),0 0 0 1px rgba(26,121,226,.45)!important}
+
+/* Experience strip: background runs full page width; content keeps its size and position; no gap before the logo strip */
+.stats-band{background:var(--sband-bg),var(--surface);border-top:1px solid var(--sband-b);border-bottom:1px solid var(--sband-b);padding:22px 0}
+.sband{background:none;border:none;border-radius:0;box-shadow:none;padding:0 12px}
+@media(max-width:760px){.stats-band{padding:20px 0}.sband{padding:0 16px}}

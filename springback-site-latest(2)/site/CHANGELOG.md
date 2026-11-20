@@ -185,3 +185,11 @@ Each package is now a version, MAJOR.MINOR.PATCH (MAJOR = redesign or structural
 - 003: Google Antigravity added to the platforms logo strip after ChatGPT / OpenAI, in both copies of the loop (`assets/img/logos/antigravity.svg`, internal IDs renamed). Reuses the "AI Agents & Assistants" / "Agentes y asistentes de IA" label. Means experience with the tool, not a partnership.
 - 004: `v2.css` cache version 2.6 → 2.7 on all pages; version comment added to every page.
 - Preview: GitHub Pages (Actions workflow publishes `site/` on every push to `main`). Repo is public only until launch.
+
+## v0.11.0 (Nov 20, 2026)
+- 001: Menu hover: an animated brand-blue line (#1a79e2) grows under top-level menu items without a dropdown (About, Pricing, Blog, FAQ, Contact). Not on Services (has a dropdown) or the "Let's Talk" button. Only on devices with hover; no animation with reduced motion. All pages (shared `v2.css`).
+- 002: Hero simplified: removed the "Flexible under pressure. Instant recovery. · Technology Advisors" line (keys `h.tagline`, `h.arch` removed). New sub-headline. EN: "We design, integrate, secure, and manage intelligent technology solutions that help you meet compliance requirements, operate smarter, scale confidently, and stay ahead." ES: "Diseñamos, integramos, protegemos y administramos soluciones tecnológicas inteligentes que te ayudan a cumplir con la normativa, operar de forma más inteligente, crecer con confianza y mantenerte a la vanguardia." Owner chose "help you meet compliance requirements" over "ensure compliance".
+- 003: Hero glass tiles restyled to match the owner's sample: frosted white (light) / faint translucent white (dark), backdrop blur, thinner bright edge, softer shadow, regular-weight text, thinner icon strokes.
+- 004: Experience strip: background now runs the full page width (like the logo strip), with thin top/bottom lines; content keeps the same size, centering and layout (desktop row, mobile 2×2). Gap before the logo strip removed.
+- 005: `v2.css` cache version 2.7 → 2.8 on all pages; version comment v0.11.0 on every page.
+- Checked in Chromium at 1440px and 390px. Validator: 0 errors, 0 warnings.
