@@ -193,3 +193,8 @@ Each package is now a version, MAJOR.MINOR.PATCH (MAJOR = redesign or structural
 - 004: Experience strip: background now runs the full page width (like the logo strip), with thin top/bottom lines; content keeps the same size, centering and layout (desktop row, mobile 2×2). Gap before the logo strip removed.
 - 005: `v2.css` cache version 2.7 → 2.8 on all pages; version comment v0.11.0 on every page.
 - Checked in Chromium at 1440px and 390px. Validator: 0 errors, 0 warnings.
+
+## v0.11.1 (Nov 20, 2026)
+- 001: Menu "Let's Talk" button now uses the primary button style (blue gradient, sheen and glow like "Book a Free Discovery Call"), sized for the menu. All pages.
+- 002: Language switch colors swapped: selected language on light blue with blue text; unselected on white (transparent in the dark theme).
+- 003: `v2.css` cache version 2.8 → 2.9; version comment v0.11.1 on every page. Validator: 0 errors, 0 warnings.

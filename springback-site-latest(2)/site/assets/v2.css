@@ -486,3 +486,17 @@ h1,h2,h3,h4,h5,h6,.hero-title,.stat-n,.plat-n{font-family:'Outfit',system-ui,san
 .stats-band{background:var(--sband-bg),var(--surface);border-top:1px solid var(--sband-b);border-bottom:1px solid var(--sband-b);padding:22px 0}
 .sband{background:none;border:none;border-radius:0;box-shadow:none;padding:0 12px}
 @media(max-width:760px){.stats-band{padding:20px 0}.sband{padding:0 16px}}
+
+/* ===== v0.11.1 (Nov 20) ===== */
+/* "Let's Talk" uses the primary button style (same blue gradient, sheen and glow as "Book a Free Discovery Call"), menu-sized */
+.nav-cta{background:linear-gradient(90deg,#1a79e2 0%,#0a66dc 55%,#0057c8 100%)!important;color:#fff!important;border:none!important;
+  box-shadow:0 8px 20px -8px rgba(26,140,240,.75),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,40,140,.18)!important;
+  padding:9px 20px!important;transition:filter .2s,box-shadow .2s}
+.nav-cta:hover,.nav-cta:focus-visible{color:#fff!important;filter:brightness(1.08);box-shadow:0 10px 24px -8px rgba(26,140,240,.9),inset 0 1px 0 rgba(255,255,255,.35)!important}
+/* Language switch: selected = light blue, unselected = white (light theme) / transparent (dark theme) */
+.lang-toggle{background:#fff;border-color:var(--border)}
+[data-theme="dark"] .lang-toggle{background:transparent}
+.lang-btn{background:transparent;color:var(--text2)}
+.lang-btn.active{background:var(--toggle-bg);color:#0057c8}
+[data-theme="dark"] .lang-btn.active{background:rgba(56,168,240,.22);color:#cfe6ff}
+@media(prefers-reduced-motion:reduce){.nav-cta{transition:none}}
