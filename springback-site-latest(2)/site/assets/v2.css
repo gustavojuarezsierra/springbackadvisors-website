@@ -494,8 +494,7 @@ h1,h2,h3,h4,h5,h6,.hero-title,.stat-n,.plat-n{font-family:'Outfit',system-ui,san
   padding:9px 20px!important;transition:filter .2s,box-shadow .2s}
 .nav-cta:hover,.nav-cta:focus-visible{color:#fff!important;filter:brightness(1.08);box-shadow:0 10px 24px -8px rgba(26,140,240,.9),inset 0 1px 0 rgba(255,255,255,.35)!important}
 /* Language switch: selected = light blue, unselected = white (light theme) / transparent (dark theme) */
-.lang-toggle{background:#fff;border-color:var(--border)}
-[data-theme="dark"] .lang-toggle{background:transparent}
+.lang-toggle{background:transparent;border-color:var(--border)}
 .lang-btn{background:transparent;color:var(--text2)}
 .lang-btn.active{background:var(--toggle-bg);color:#0057c8}
 [data-theme="dark"] .lang-btn.active{background:rgba(56,168,240,.22);color:#cfe6ff}

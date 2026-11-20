@@ -198,3 +198,7 @@ Each package is now a version, MAJOR.MINOR.PATCH (MAJOR = redesign or structural
 - 001: Menu "Let's Talk" button now uses the primary button style (blue gradient, sheen and glow like "Book a Free Discovery Call"), sized for the menu. All pages.
 - 002: Language switch colors swapped: selected language on light blue with blue text; unselected on white (transparent in the dark theme).
 - 003: `v2.css` cache version 2.8 → 2.9; version comment v0.11.1 on every page. Validator: 0 errors, 0 warnings.
+
+## v0.11.2 (Nov 20, 2026)
+- 001: Language switch: unselected language is now transparent (shows the menu background) in both themes, instead of white. Selected stays light blue.
+- 002: `v2.css` cache version 2.9 → 3.0; version comment v0.11.2. Validator: 0 errors, 0 warnings.
